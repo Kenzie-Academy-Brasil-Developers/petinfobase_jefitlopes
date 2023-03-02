@@ -36,5 +36,3 @@ const createPage = () => {
     `) 
  }
  createPage()
-
- 

@@ -1,3 +1,5 @@
+import { loginRequest } from "./request.js";
+
 const createPage = () => {
     document.body.insertAdjacentHTML('beforeend', `
     <main>
@@ -17,9 +19,9 @@ const createPage = () => {
                 <h2>login</h2>
                 <div>
                     <label for="">Email</label>
-                    <input type="text" name="email" id="email" placeholder="Digite seu email aqui">
+                    <input type="email" name="email" id="email" placeholder="Digite seu email aqui">
                     <label for="">Senha</label>
-                    <input type="text" name="password" id="password" placeholder="Digite sua senha aqui">
+                    <input type="password" name="password" id="password" placeholder="Digite sua senha aqui">
                     <button class="login__btn">Acessar</button>
                 </div>
                 <p class="create__title">Ainda não possui conta?</p>
@@ -31,3 +33,28 @@ const createPage = () => {
     `) 
  }
  createPage()
+
+ function handleLogin(){
+    const inputs = document.querySelectorAll('input');
+    const button = document.querySelector('.login__btn');
+    const loginBoody = {};
+    let count = 0;
+
+    button.addEventListener('click', async (event) => {
+        event.preventDefault()
+
+        inputs.forEach(input => {
+            if(input.value === ''){
+                count++
+            }
+            loginBoody[input.name] = input.value;
+        })
+        if (count !== 0){
+            return alert('Por favor preencha os campos e tente novamente')
+        } else{
+            const token = await loginRequest(loginBoody)
+            return token;
+        }
+    })
+ }
+ handleLogin()
