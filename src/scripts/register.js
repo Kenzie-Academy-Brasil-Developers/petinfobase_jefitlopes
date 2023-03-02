@@ -1,24 +1,34 @@
-const createPage = () => {
+import { registerRequest } from "./request.js"
+
+function authentication(){
+    const token = localStorage.getItem('@doit:token')
+
+    if(token){
+        window.location.replace('./dashboard.html')
+    }
+}
+
+const createRegisterPage = () => {
     document.body.insertAdjacentHTML('beforeend', `
     <main>
         <div class="register__container">
             <form class="register__form">
                 <div class="form__header">
                     <h2 class="form__title">Cadastro</h2>
-                    <button class="back__btn">Voltar para o login</button>
+                    <a href="../../index.html" class="back__btn">Voltar para o Login</a>
                 </div>
                 <div class="form__inputs">
                     <label>Usuário</label>
-                    <input type="text" name="username" id="usernameRegister" placeholder="Digite seu usuário aqui" required>
+                    <input type="text" name="username" id="usernameRegister" placeholder="Digite seu usuário aqui">
                     <label>Email</label>
-                    <input type="text" name="email" id="emailRegister" placeholder="Digite seu email aqui" required>
+                    <input type="email" name="email" id="emailRegister" placeholder="Digite seu email aqui">
                     <label for="">Link da foto do perfil</label>
-                    <input type="text" name="photo" id="photoRegister" placeholder="Insira o link aqui" required>
+                    <input type="text" name="avatar" id="photoRegister" placeholder="Insira o link aqui">
                     <label for="">Senha</label>
-                    <input type="text" name="password" id="passworRegister" placeholder="Digite sua senha aqui" required>
-                    <button>Cadastrar</button>
+                    <input type="password" name="password" id="passworRegister" placeholder="Digite sua senha aqui">
+                    <button class="btn__register">Cadastrar</button>
                 </div>
-                <button>Voltar para o login</button>
+                <a href="../../index.html" class="back__btn--botton">Voltar para o Login</a>
             </form>
         </div>
         <div class="general__container">
@@ -35,4 +45,34 @@ const createPage = () => {
     </main>
     `) 
  }
- createPage()
+ createRegisterPage()
+
+function handleRegister(){
+    const inputs = document.querySelectorAll('input')
+    const button = document.querySelector('.btn__register')
+    const registerBody = {}
+    let emptyInput = 0;
+
+    button.addEventListener('click', async (event) =>{
+        event.preventDefault()
+
+        inputs.forEach(({name, value}) => {
+            if(value === ''){
+                emptyInput++
+            }
+            registerBody[name] = value;
+        })
+        if (emptyInput !== 0){
+            return alert('Por favor preencha todos os campos necessários para realizar o cadastro')
+        } else{
+            const newUser = await registerRequest(registerBody)
+
+            setTimeout(() => {
+                window.location.replace('../../index.html')
+            }, 1000);
+        }
+        
+    })
+ }
+ handleRegister()
+ authentication()

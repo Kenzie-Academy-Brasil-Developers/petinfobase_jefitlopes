@@ -1,5 +1,13 @@
 import { loginRequest } from "./request.js";
 
+function authentication(){
+    const token = localStorage.getItem('@doit:token')
+
+    if(token){
+        window.location.replace('./src/pages/dashboard.html')
+    }
+}
+
 const createPage = () => {
     document.body.insertAdjacentHTML('beforeend', `
     <main>
@@ -26,7 +34,7 @@ const createPage = () => {
                 </div>
                 <p class="create__title">Ainda não possui conta?</p>
                 <p class="create__text">Clicando no botão abaixo, você pode se cadastrar rapidamente</p>
-                <button class="register__btn">Cadastrar</button>
+                <a href="./src/pages/register.html" class="register__btn">Cadastrar</a>
             </form>
         </div>
     </main>
@@ -43,18 +51,24 @@ const createPage = () => {
     button.addEventListener('click', async (event) => {
         event.preventDefault()
 
-        inputs.forEach(input => {
-            if(input.value === ''){
+        inputs.forEach(({name, value}) => {
+            if(value === ''){
                 count++
             }
-            loginBoody[input.name] = input.value;
+            loginBoody[name] = value;
         })
         if (count !== 0){
             return alert('Por favor preencha os campos e tente novamente')
         } else{
             const token = await loginRequest(loginBoody)
+
+            setTimeout(() => {
+                window.location.replace('./src/pages/dashboard.html')
+            }, 1000);
+
             return token;
         }
-    })
+    });
  }
  handleLogin()
+ authentication()
