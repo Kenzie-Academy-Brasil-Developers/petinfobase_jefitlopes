@@ -1,8 +1,14 @@
-function authentication(){
-    const token = localStorage.getItem('@doit:token')
+import { render } from "./render.js";
+import { getUserProfile } from "./request.js";
 
-    if(!token){
-        window.location.replace('../../index.html')
+function authentication() {
+    const token = localStorage.getItem('@petInfo:token');
+  
+    if(!token) {
+      window.location.replace('../../index.html');
     }
-}
-authentication()
+  }
+
+authentication();
+render();
+await getUserProfile();

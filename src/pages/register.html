@@ -1,15 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./src/styles/reset.css">
-    <link href="./src/styles/globalStyles.css">
-    <link href="./src/styles/regiter.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/globalStyles.css">
+    <link rel="stylesheet" href="../styles/register.css">
+
+    <script type="module" src="../scripts/register.js" defer></script>
+
     <title>PetInfo</title>
 </head>
 <body>
-    <script type="module" src="../scripts/register.js" defer></script>
+    <main>
+        <section class="register__container">
+            <form class="form__container">
+                <h2 class="form__title">Cadastro</h2>
+                <a href="../../index.html" class="login__page--top">Voltar para o login</a>       
+                    <label for="" class="user__title">Usuário</label>
+                    <input type="text" name="user" class="user__input" placeholder="Digite seu usuário aqui">
+                    <label for="" class="email__title">Email</label>
+                    <input type="email" name="email" class="email__input" placeholder="Digite seu email aqui">
+                    <label for="" class="photo__title">Link da foto do perfil</label>
+                    <input type="url" name="photo" class="photo__input" placeholder="Insira o link aqui">
+                    <label for="" class="password__title">Senha</label>
+                    <input type="password" name="password" class="password__input" placeholder="Digite sua senha aqui">
+                <button class="register__btn" type="submit">Cadastrar</button>
+            </form>
+            
+            <a href="../../index.html" class="login__page--botton">Voltar para o login</a>
+        </section>  
+
+        <section class="site__container">
+            <div>
+                <h1>Petinfo</h1>
+                <h2>Ooooooba!</h2>
+                <p>Agora vamos poder contribuir para o bem estar do seu pet por meio do conhecimento</p>
+            </div>
+            <div class="img__site">
+                <img class="img__site--cat3" src="../assets/images/cat3.svg" alt="Cat">
+                <img class="img__site--cat4" src="../assets/images/cat4.svg" alt="Cat">
+                <img class="img__site--dog3" src="../assets/images/dog3.svg" alt="Dog">
+                <img class="img__site--cat5" src="../assets/images/cat5.svg" alt="Cat">
+            </div>
+        </section>
+    </main>
+
 </body>
 </html>
+
